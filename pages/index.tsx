@@ -6,14 +6,11 @@ const COUNTRIES: Record<string, string> = {
     Ireland: '🇮🇪', Netherlands: '🇳🇱', 'New Zealand': '🇳🇿', Singapore: '🇸🇬',
     Sweden: '🇸🇪', Switzerland: '🇨🇭', UAE: '🇦🇪', UK: '🇬🇧', USA: '🇺🇸',
 }
-
 const EXAMS = ['IELTS', 'TOEFL', 'PTE', 'DET', 'GRE']
 const DEGREES = ['Undergraduate', 'Masters', 'PhD']
-
 const EXAM_INFO: Record<string, string> = {
     IELTS: '0 – 9', TOEFL: '0 – 120', PTE: '10 – 90', DET: '10 – 160', GRE: '260 – 340',
 }
-
 const COLOR: Record<string, string> = {
     Strong: '#22c55e', Average: '#f59e0b', Weak: '#ef4444',
 }
@@ -21,13 +18,15 @@ const COLOR: Record<string, string> = {
 export default function Home() {
     const [form, setForm] = useState({
         degree: 'Masters', exam_type: 'IELTS', exam_score: '7',
-        work_exp: '2', cgpa: '8.0', sop: '3', lor: '3', research: '0', country: 'Australia',
+        work_exp: '2', cgpa: '8.0', sop: '3', lor: '3', research: '0',
+        country: 'Australia', internship: 'false',
     })
     const [result, setResult] = useState<any>(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
 
     const set = (k: string) => (e: any) => setForm(f => ({ ...f, [k]: e.target.value }))
+    const setVal = (k: string, v: string) => setForm(f => ({ ...f, [k]: v }))
 
     const predict = async () => {
         setLoading(true); setError(''); setResult(null)
@@ -36,8 +35,10 @@ export default function Home() {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    ...form, exam_score: +form.exam_score, work_exp: +form.work_exp,
-                    cgpa: +form.cgpa, sop: +form.sop, lor: +form.lor, research: +form.research
+                    ...form,
+                    exam_score: +form.exam_score, work_exp: +form.work_exp,
+                    cgpa: +form.cgpa, sop: +form.sop, lor: +form.lor,
+                    research: +form.research, internship: form.internship === 'true',
                 }),
             })
             const data = await res.json()
@@ -51,7 +52,7 @@ export default function Home() {
         <>
             <Head>
                 <title>🎓 Global Admission Predictor</title>
-                <meta name="description" content="AI-powered Masters admission predictor for 13 countries" />
+                <meta name="description" content="Predict your Masters admission chances across 13 countries" />
                 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
             </Head>
 
@@ -73,9 +74,6 @@ export default function Home() {
                     }}>
                         🎓 Global Admission Predictor
                     </h1>
-                    <p style={{ color: '#94a3b8', marginTop: 10, fontSize: '1rem' }}>
-                        AI-powered admission probability across <strong style={{ color: '#c4b5fd' }}>13 countries</strong> · Random Forest · 1,000+ records
-                    </p>
                 </div>
 
                 {/* Form */}
@@ -83,41 +81,40 @@ export default function Home() {
                     maxWidth: 900, margin: '0 auto', display: 'grid',
                     gridTemplateColumns: 'repeat(auto-fit,minmax(380px,1fr))', gap: 20
                 }}>
-
                     {/* Left — Academic */}
                     <Card title="🏫 Academic Profile">
                         <Field label="Degree Level">
                             <Select value={form.degree} onChange={set('degree')} options={DEGREES} />
                         </Field>
-                        <Field label={`CGPA  (6.0 – 10.0) — ${form.cgpa}`}>
-                            <input type="range" min={6} max={10} step={0.1} value={form.cgpa}
-                                onChange={set('cgpa')} style={sliderStyle} />
-                        </Field>
-                        <Field label={`SOP Strength — ${form.sop} / 5`}>
-                            <input type="range" min={1} max={5} step={0.5} value={form.sop}
-                                onChange={set('sop')} style={sliderStyle} />
-                        </Field>
-                        <Field label={`LOR Strength — ${form.lor} / 5`}>
-                            <input type="range" min={1} max={5} step={0.5} value={form.lor}
-                                onChange={set('lor')} style={sliderStyle} />
-                        </Field>
-                        <Field label={`Work Experience — ${form.work_exp} yr(s)`}>
-                            <input type="range" min={0} max={10} step={1} value={form.work_exp}
-                                onChange={set('work_exp')} style={sliderStyle} />
-                        </Field>
+
+                        <SliderField
+                            label="CGPA" unit="" min={6} max={10} step={0.1}
+                            value={form.cgpa} onChange={v => setVal('cgpa', v)}
+                        />
+                        <SliderField
+                            label="SOP Strength" unit="/5" min={1} max={5} step={0.5}
+                            value={form.sop} onChange={v => setVal('sop', v)}
+                        />
+                        <SliderField
+                            label="LOR Strength" unit="/5" min={1} max={5} step={0.5}
+                            value={form.lor} onChange={v => setVal('lor', v)}
+                        />
+                        <SliderField
+                            label="Work Experience" unit=" yrs" min={0} max={10} step={1}
+                            value={form.work_exp} onChange={v => setVal('work_exp', v)}
+                        />
+
                         <Field label="Research Experience">
-                            <div style={{ display: 'flex', gap: 12, marginTop: 6 }}>
-                                {[['0', 'No ❌'], ['1', 'Yes ✅']].map(([v, l]) => (
-                                    <label key={v} style={{
-                                        display: 'flex', alignItems: 'center', gap: 8,
-                                        cursor: 'pointer', color: form.research === v ? '#c4b5fd' : '#64748b',
-                                        fontWeight: form.research === v ? 700 : 400
-                                    }}>
-                                        <input type="radio" value={v} checked={form.research === v}
-                                            onChange={set('research')} /> {l}
-                                    </label>
-                                ))}
-                            </div>
+                            <RadioGroup
+                                options={[['0', 'No ❌'], ['1', 'Yes ✅']]}
+                                value={form.research} onChange={v => setVal('research', v)}
+                            />
+                        </Field>
+                        <Field label="💼 Internship / Project Experience">
+                            <RadioGroup
+                                options={[['false', 'No ❌'], ['true', 'Yes ✅']]}
+                                value={form.internship} onChange={v => setVal('internship', v)}
+                            />
                         </Field>
                     </Card>
 
@@ -126,14 +123,14 @@ export default function Home() {
                         <Field label="Target Country">
                             <Select value={form.country} onChange={set('country')}
                                 options={Object.keys(COUNTRIES).map(c => `${COUNTRIES[c]} ${c}`)}
-                                valueMap={Object.keys(COUNTRIES).map(c => c)} />
+                                valueMap={Object.keys(COUNTRIES)} />
                         </Field>
                         <Field label="Exam Type">
                             <Select value={form.exam_type} onChange={set('exam_type')} options={EXAMS} />
                         </Field>
                         <Field label={`Exam Score  (${EXAM_INFO[form.exam_type]})`}>
                             <input type="number" value={form.exam_score} onChange={set('exam_score')}
-                                style={{ ...inputStyle, width: '100%', boxSizing: 'border-box' }} />
+                                style={{ ...inputStyle, width: '100%', boxSizing: 'border-box' as any }} />
                         </Field>
                     </Card>
                 </div>
@@ -170,7 +167,6 @@ export default function Home() {
                         border: '1.5px solid rgba(139,92,246,.55)', borderRadius: 18,
                         padding: '28px', boxShadow: '0 0 32px rgba(109,40,217,.3)'
                     }}>
-
                         {/* Big number */}
                         <div style={{ textAlign: 'center', marginBottom: 20 }}>
                             <div style={{
@@ -198,32 +194,24 @@ export default function Home() {
                         </div>
 
                         <HR />
-
-                        {/* Profile summary */}
                         <SectionTitle>📋 Your Profile</SectionTitle>
-                        <div style={{
-                            display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px 24px',
-                            fontSize: '.88rem', color: '#94a3b8', marginTop: 10
-                        }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px 24px', fontSize: '.88rem', color: '#94a3b8', marginTop: 10 }}>
                             {[
                                 ['Degree', form.degree], ['Country', `${COUNTRIES[form.country]} ${form.country}`],
                                 ['Exam', `${form.exam_type} — ${form.exam_score}`], ['CGPA', form.cgpa],
                                 ['SOP', `${form.sop}/5`], ['LOR', `${form.lor}/5`],
-                                ['Research', form.research === '1' ? 'Yes ✅' : 'No ❌'], ['Work Exp', `${form.work_exp} yr(s)`],
+                                ['Research', form.research === '1' ? 'Yes ✅' : 'No ❌'],
+                                ['Work Exp', `${form.work_exp} yr(s)`],
+                                ['Internship', form.internship === 'true' ? 'Yes ✅' : 'No ❌'],
                             ].map(([k, v]) => (<span key={k}><b style={{ color: '#c4b5fd' }}>{k}</b> — {v}</span>))}
                         </div>
 
                         <HR />
-
-                        {/* Scorecard */}
                         <SectionTitle>📈 Profile Strength</SectionTitle>
                         <div style={{ marginTop: 10 }}>
                             {Object.entries(result.scorecard).map(([key, val]: any) => (
                                 <div key={key} style={{ marginBottom: 10 }}>
-                                    <div style={{
-                                        display: 'flex', justifyContent: 'space-between',
-                                        fontSize: '.82rem', color: '#94a3b8', marginBottom: 3
-                                    }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '.82rem', color: '#94a3b8', marginBottom: 3 }}>
                                         <span>{key}</span>
                                         <span style={{ color: COLOR[val.rating], fontWeight: 700 }}>
                                             {val.value}{key === 'CGPA' ? '' : key === 'Work Exp' ? ' yrs' : '/5'} — {val.rating}
@@ -239,7 +227,6 @@ export default function Home() {
                             ))}
                         </div>
 
-                        {/* Tips */}
                         {result.tips.length > 0 && (
                             <>
                                 <HR />
@@ -250,7 +237,6 @@ export default function Home() {
                             </>
                         )}
 
-                        {/* Country-exam fit */}
                         {result.fit_warning && (
                             <>
                                 <HR />
@@ -267,17 +253,15 @@ export default function Home() {
 
                 {/* Country chips */}
                 <div style={{ maxWidth: 900, margin: '28px auto 0', textAlign: 'center' }}>
-                    <div style={{
-                        color: '#475569', fontSize: '.72rem', letterSpacing: '.06em',
-                        textTransform: 'uppercase', marginBottom: 10
-                    }}>🌍 Supported Countries</div>
+                    <div style={{ color: '#475569', fontSize: '.72rem', letterSpacing: '.06em', textTransform: 'uppercase', marginBottom: 10 }}>
+                        🌍 Supported Countries
+                    </div>
                     <div>
                         {Object.entries(COUNTRIES).map(([name, flag]) => (
                             <span key={name} style={{
-                                display: 'inline-block', margin: '4px 5px',
-                                padding: '4px 14px', borderRadius: 999,
-                                background: 'rgba(109,40,217,.18)', border: '1px solid rgba(139,92,246,.35)',
-                                color: '#c4b5fd', fontSize: '.8rem', fontWeight: 600
+                                display: 'inline-block', margin: '4px 5px', padding: '4px 14px',
+                                borderRadius: 999, background: 'rgba(109,40,217,.18)',
+                                border: '1px solid rgba(139,92,246,.35)', color: '#c4b5fd', fontSize: '.8rem', fontWeight: 600
                             }}>
                                 {flag} {name}
                             </span>
@@ -289,7 +273,47 @@ export default function Home() {
     )
 }
 
-// ── Tiny helper components ─────────────────────────────
+// ── Slider + manual input combo ────────────────────────
+function SliderField({ label, unit, min, max, step, value, onChange }: {
+    label: string; unit: string; min: number; max: number; step: number;
+    value: string; onChange: (v: string) => void
+}) {
+    return (
+        <Field label={`${label}${unit ? '  (' + min + ' – ' + max + unit + ')' : ''}`}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <input type="range" min={min} max={max} step={step} value={value}
+                    onChange={e => onChange(e.target.value)}
+                    style={{ flex: 1, accentColor: '#7c3aed', cursor: 'pointer' }} />
+                <input type="number" min={min} max={max} step={step} value={value}
+                    onChange={e => onChange(e.target.value)}
+                    style={{
+                        ...inputStyle, width: 72, textAlign: 'center',
+                        padding: '6px 8px', flexShrink: 0
+                    }} />
+            </div>
+        </Field>
+    )
+}
+
+// ── Radio group ────────────────────────────────────────
+function RadioGroup({ options, value, onChange }: {
+    options: [string, string][]; value: string; onChange: (v: string) => void
+}) {
+    return (
+        <div style={{ display: 'flex', gap: 12, marginTop: 6 }}>
+            {options.map(([v, l]) => (
+                <label key={v} style={{
+                    display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer',
+                    color: value === v ? '#c4b5fd' : '#64748b', fontWeight: value === v ? 700 : 400
+                }}>
+                    <input type="radio" value={v} checked={value === v} onChange={() => onChange(v)} /> {l}
+                </label>
+            ))}
+        </div>
+    )
+}
+
+// ── Shared helpers ─────────────────────────────────────
 const cardStyle: React.CSSProperties = {
     background: 'rgba(255,255,255,.04)', border: '1px solid rgba(139,92,246,.2)',
     borderRadius: 16, padding: '20px 22px',
@@ -328,16 +352,12 @@ function HR() {
 }
 function SectionTitle({ children }: { children: React.ReactNode }) {
     return (
-        <div style={{
-            color: '#c4b5fd', fontWeight: 700, fontSize: '.8rem',
-            letterSpacing: '.06em', textTransform: 'uppercase'
-        }}>{children}</div>
+        <div style={{ color: '#c4b5fd', fontWeight: 700, fontSize: '.8rem', letterSpacing: '.06em', textTransform: 'uppercase' }}>
+            {children}
+        </div>
     )
 }
 const inputStyle: React.CSSProperties = {
     background: 'rgba(20,10,50,.7)', border: '1px solid rgba(139,92,246,.35)',
     color: '#e2e8f0', borderRadius: 10, padding: '9px 12px', fontSize: '.9rem', outline: 'none',
-}
-const sliderStyle: React.CSSProperties = {
-    width: '100%', accentColor: '#7c3aed', cursor: 'pointer',
 }
