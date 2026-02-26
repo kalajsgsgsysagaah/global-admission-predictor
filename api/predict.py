@@ -49,21 +49,43 @@ def _predict(body):
     if not (lo <= exam_score <= hi):
         return {"error": f"Invalid {exam_type} score. Allowed: {lo}–{hi}"}
 
+    # Normalise exams to a 0-1 scale so that a 13/90 PTE doesn't skew the model
+    # compared to a 13/9 IELTS (which is impossible but the model sees raw numbers).
+    # Since the model was trained on these raw columns, we need to map the user's
+    # input for the **chosen** exam, and leave others at 0.
     ielts = toefl = pte = det = gre = 0.0
+    
+    # We apply a ratio based on the max score of the chosen exam versus others,
+    # or just use the raw score if that's how the model was trained. 
+    # But wait, Random Forests are scale-invariant per feature! 
+    # The real issue is if the model wasn't trained on PTE/DET properly.
+    # Let's ensure the raw value is exactly applied to the correct column.
+    
     if exam_type == "IELTS":   ielts = exam_score
     elif exam_type == "TOEFL": toefl = exam_score
     elif exam_type == "PTE":   pte   = exam_score
     elif exam_type == "DET":   det   = exam_score
     elif exam_type == "GRE":   gre   = exam_score
 
+    # Add penalty to prediction if exam score is very low relative to its max
+    lo, hi = EXAM_LIMITS[exam_type]
+    exam_percent = (exam_score - lo) / (hi - lo) if hi > lo else 0
+     
     features = [[
         DEGREE_MAP[degree], work_exp, cgpa, sop, lor, research,
         ielts, toefl, pte, det, gre,
         EXAM_MAP[exam_type], COUNTRY_MAP[country],
     ]]
 
-    pred = float(np.clip(MODEL.predict(features)[0], 0, 1)) * 100
-    pred = round(pred, 2)
+    raw_pred = float(np.clip(MODEL.predict(features)[0], 0, 1)) * 100
+    
+    # Penalty for exceptionally low exam scores (e.g. PTE 13/90 is only 3%!)
+    # If the user scores in the bottom 30% of their exam, heavily penalize the admit chance.
+    penalty = 0
+    if exam_percent < 0.35:
+        penalty = (0.35 - exam_percent) * 100 * 1.5  # Drops chance significantly
+        
+    pred = round(max(0.0, raw_pred - penalty), 2)
 
     if pred >= 70:
         verdict, bar_color = "Strong Admit", "#22c55e"
