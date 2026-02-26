@@ -1,0 +1,41 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "package.json",
+            "use": "@vercel/next"
+        },
+        {
+            "src": "api/predict.py",
+            "use": "@vercel/python",
+            "config": {
+                "maxLambdaSize": "50mb"
+            }
+        }
+    ],
+    "routes": [
+        {
+            "src": "/api/(.*)",
+            "dest": "/api/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/$1"
+        }
+    ],
+    "env": {
+        "GRADIO_ANALYTICS_ENABLED": "false",
+        "GRADIO_SERVER_NAME": "0.0.0.0",
+        "PYTHONPATH": ".",
+        "PYTHON_VERSION": "3.11"
+    },
+    "regions": [
+        "bom1"
+    ],
+    "functions": {
+        "api/predict.py": {
+            "maxDuration": 30,
+            "memory": 1024
+        }
+    }
+}

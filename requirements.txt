@@ -1,0 +1,9 @@
+# Python deps for Vercel serverless (api/predict.py)
+scikit-learn==1.4.2
+pandas==2.2.2
+numpy==1.26.4
+
+# For local Gradio app (app.py) — not used by Vercel
+gradio==4.44.0
+fastapi==0.115.0
+uvicorn==0.30.6
