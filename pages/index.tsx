@@ -137,9 +137,10 @@ export default function Home() {
                     {/* Right — Destination */}
                     <Card title="🌍 Destination & Exam" glowColor="rgba(56,189,248,0.15)">
                         <Field label="Target Country">
-                            <Select value={form.country} onChange={set('country')}
-                                options={Object.keys(COUNTRIES).map(c => `${COUNTRIES[c]} ${c}`)}
-                                valueMap={Object.keys(COUNTRIES)} />
+                            <CountrySelect
+                                value={form.country}
+                                onChange={(v: string) => setVal('country', v)}
+                            />
                         </Field>
                         <Field label="Exam Type">
                             <Select value={form.exam_type} onChange={set('exam_type')} options={EXAMS} />
@@ -304,11 +305,11 @@ export default function Home() {
                 {/* Footer Clickable Country Chips with FlagCDN */}
                 <div style={{ maxWidth: 900, margin: '48px auto 0', textAlign: 'center' }}>
                     <div style={{ color: '#64748b', fontSize: '.8rem', letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 16, fontWeight: 700 }}>
-                        🌍 Click a Country to View Top Universities
+                        🌍 Click a Country to View Top Universities, ROI, Weather & GDP
                     </div>
                     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 12 }}>
                         {Object.keys(COUNTRIES).map((name) => (
-                            <a key={name} href={`https://www.google.com/search?q=Top+masters+universities+in+${name}`} target="_blank" rel="noopener noreferrer" style={{
+                            <a key={name} href={`https://www.google.com/search?q=Study+in+${name}+universities+ROI+weather+GDP+overview`} target="_blank" rel="noopener noreferrer" style={{
                                 display: 'flex', alignItems: 'center', gap: 10, padding: '10px 20px',
                                 borderRadius: 14, background: 'rgba(30, 41, 59, 0.6)',
                                 border: '1px solid rgba(139, 92, 246, 0.2)', color: '#c4b5fd', fontSize: '.95rem', fontWeight: 600,
@@ -431,14 +432,62 @@ function Select({ value, onChange, options, valueMap }: {
                 ...inputStyle, width: '100%', cursor: 'pointer', appearance: 'none', paddingRight: 40
             }}>
                 {options.map((o, i) => (
-                    <option key={o} value={valueMap ? valueMap[i] : o} style={{ background: '#0f172a', color: '#f8fafc' }}>
+                    <option key={o} value={valueMap ? valueMap[i] : o} style={{ background: '#0f172a', color: '#cbd5e1' }}>
                         {o}
                     </option>
                 ))}
             </select>
-            <div style={{ position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', fontSize: '0.8rem' }}>
+            <div style={{ position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', fontSize: '0.8rem', color: '#64748b' }}>
                 ▼
             </div>
+        </div>
+    )
+}
+
+function CountrySelect({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+    const [isOpen, setIsOpen] = useState(false)
+    return (
+        <div style={{ position: 'relative' }}>
+            <div
+                onClick={() => setIsOpen(!isOpen)}
+                style={{
+                    ...inputStyle, width: '100%', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10,
+                    boxSizing: 'border-box' as any, minHeight: 46
+                }}
+            >
+                <img src={`https://flagcdn.com/w20/${COUNTRY_ISO[value]}.png`} alt={value} style={{ width: 20, borderRadius: 2, boxShadow: '0 2px 4px rgba(0,0,0,0.4)' }} />
+                <span>{value}</span>
+                <div style={{ marginLeft: 'auto', fontSize: '0.8rem', color: '#64748b' }}>▼</div>
+            </div>
+
+            {isOpen && (
+                <>
+                    <div style={{ position: 'fixed', inset: 0, zIndex: 9 }} onClick={() => setIsOpen(false)} />
+                    <div style={{
+                        position: 'absolute', top: '100%', left: 0, right: 0, marginTop: 4, zIndex: 10,
+                        background: '#0f172a', border: '1px solid rgba(139,92,246,0.3)', borderRadius: 12,
+                        maxHeight: 280, overflowY: 'auto', boxShadow: '0 10px 25px rgba(0,0,0,0.6)',
+                    }}>
+                        {Object.keys(COUNTRIES).map(name => (
+                            <div key={name}
+                                onClick={() => { onChange(name); setIsOpen(false); }}
+                                style={{
+                                    padding: '10px 14px', display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer',
+                                    background: value === name ? 'rgba(139,92,246,0.2)' : 'transparent',
+                                    color: value === name ? '#c4b5fd' : '#cbd5e1',
+                                    transition: 'background 0.2s',
+                                    borderBottom: '1px solid rgba(255,255,255,0.03)'
+                                }}
+                                onMouseOver={e => e.currentTarget.style.background = 'rgba(139,92,246,0.15)'}
+                                onMouseOut={e => e.currentTarget.style.background = value === name ? 'rgba(139,92,246,0.2)' : 'transparent'}
+                            >
+                                <img src={`https://flagcdn.com/w20/${COUNTRY_ISO[name]}.png`} alt={name} style={{ width: 20, borderRadius: 2, boxShadow: '0 2px 4px rgba(0,0,0,0.4)' }} />
+                                {name}
+                            </div>
+                        ))}
+                    </div>
+                </>
+            )}
         </div>
     )
 }
