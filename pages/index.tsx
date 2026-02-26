@@ -12,8 +12,8 @@ const COUNTRY_ISO: Record<string, string> = {
     Sweden: 'se', Switzerland: 'ch', UAE: 'ae', UK: 'gb', USA: 'us',
 }
 
-const EXAMS = ['IELTS', 'TOEFL', 'PTE', 'DET', 'GRE']
-const DEGREES = ['Undergraduate', 'Masters', 'PhD']
+const EXAMS = ['📝 IELTS', '🖥️ TOEFL', '💻 PTE', '📱 DET', '🧠 GRE']
+const DEGREES = ['🎓 Undergraduate', '🎓 Masters', '🎓 PhD']
 const EXAM_INFO: Record<string, string> = {
     IELTS: '0 – 9', TOEFL: '0 – 120', PTE: '10 – 90', DET: '10 – 160', GRE: '260 – 340',
 }
@@ -99,24 +99,24 @@ export default function Home() {
                 }}>
                     {/* Left — Academic */}
                     <Card title="🏫 Academic Profile" glowColor="rgba(139,92,246,0.15)">
-                        <Field label="Degree Level">
+                        <Field label="📜 Degree Level">
                             <Select value={form.degree} onChange={set('degree')} options={DEGREES} />
                         </Field>
 
                         <SliderField
-                            label="CGPA" unit="" min={6} max={10} step={0.1}
+                            label="📊 CGPA" unit="" min={6} max={10} step={0.1}
                             value={form.cgpa} onChange={v => setVal('cgpa', v)}
                         />
                         <SliderField
-                            label="SOP Strength" unit="/5" min={1} max={5} step={0.5}
+                            label="✍️ SOP Strength" unit="/5" min={1} max={5} step={0.5}
                             value={form.sop} onChange={v => setVal('sop', v)}
                         />
                         <SliderField
-                            label="LOR Strength" unit="/5" min={1} max={5} step={0.5}
+                            label="🤝 LOR Strength" unit="/5" min={1} max={5} step={0.5}
                             value={form.lor} onChange={v => setVal('lor', v)}
                         />
                         <SliderField
-                            label="Work Experience" unit=" yrs" min={0} max={10} step={1}
+                            label="💼 Work Experience" unit=" yrs" min={0} max={10} step={1}
                             value={form.work_exp} onChange={v => setVal('work_exp', v)}
                         />
 
@@ -136,16 +136,16 @@ export default function Home() {
 
                     {/* Right — Destination */}
                     <Card title="🌍 Destination & Exam" glowColor="rgba(56,189,248,0.15)">
-                        <Field label="Target Country">
+                        <Field label="🎯 Target Country">
                             <CountrySelect
                                 value={form.country}
                                 onChange={(v: string) => setVal('country', v)}
                             />
                         </Field>
-                        <Field label="Exam Type">
-                            <Select value={form.exam_type} onChange={set('exam_type')} options={EXAMS} />
+                        <Field label="📝 Exam Type">
+                            <Select value={form.exam_type} onChange={set('exam_type')} options={EXAMS} valueMap={['IELTS', 'TOEFL', 'PTE', 'DET', 'GRE']} />
                         </Field>
-                        <Field label={`Exam Score  (${EXAM_INFO[form.exam_type]})`}>
+                        <Field label={`💯 Exam Score  (${EXAM_INFO[form.exam_type] || ''})`}>
                             <input type="number" value={form.exam_score} onChange={set('exam_score')}
                                 style={{ ...inputStyle, width: '100%', boxSizing: 'border-box' as any }} />
                         </Field>
@@ -241,13 +241,13 @@ export default function Home() {
                         <SectionTitle icon="📋">Your Profile</SectionTitle>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px 24px', fontSize: '.95rem', color: '#cbd5e1', marginTop: 16 }}>
                             {[
-                                ['Degree', form.degree],
-                                ['Country', <span key="c" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><img src={`https://flagcdn.com/w20/${COUNTRY_ISO[form.country]}.png`} alt={form.country} style={{ width: 18, borderRadius: 2, boxShadow: '0 2px 4px rgba(0,0,0,0.3)' }} /> {form.country}</span>],
-                                ['Exam', `${form.exam_type} — ${form.exam_score}`], ['CGPA', form.cgpa],
-                                ['SOP', `${form.sop}/5`], ['LOR', `${form.lor}/5`],
-                                ['Research', form.research === '1' ? 'Yes ✅' : 'No ❌'],
-                                ['Work Exp', `${form.work_exp} yr(s)`],
-                                ['Internship', form.internship === 'true' ? 'Yes ✅' : 'No ❌'],
+                                ['📜 Degree', form.degree],
+                                ['🌍 Country', <span key="c" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><img src={`https://flagcdn.com/w20/${COUNTRY_ISO[form.country]}.png`} alt={form.country} style={{ width: 18, borderRadius: 2, boxShadow: '0 2px 4px rgba(0,0,0,0.3)' }} /> {form.country}</span>],
+                                ['📝 Exam', `${form.exam_type} — ${form.exam_score}`], ['📊 CGPA', form.cgpa],
+                                ['✍️ SOP', `${form.sop}/5`], ['🤝 LOR', `${form.lor}/5`],
+                                ['🔬 Research', form.research === '1' ? 'Yes ✅' : 'No ❌'],
+                                ['💼 Work Exp', `${form.work_exp} yr(s)`],
+                                ['🚀 Internship', form.internship === 'true' ? 'Yes ✅' : 'No ❌'],
                             ].map(([k, v]) => (<span key={k as string} style={{ padding: '6px 12px', background: 'rgba(0,0,0,0.2)', borderRadius: 8, border: '1px solid rgba(255,255,255,0.03)' }}><b style={{ color: '#c4b5fd' }}>{k}</b> — {v}</span>))}
                         </div>
 
