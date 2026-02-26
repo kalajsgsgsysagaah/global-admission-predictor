@@ -78,15 +78,16 @@ def _predict(body):
         if val >= avg:    return "Average"
         return "Weak"
 
-    scorecard = {
-        "CGPA":       {"value": cgpa,     "rating": rate(cgpa,     8.0, 7.0)},
-        "SOP":        {"value": sop,      "rating": rate(sop,      4.5, 3.0)},
-        "LOR":        {"value": lor,      "rating": rate(lor,      4.5, 3.0)},
-        "Work Exp":   {"value": work_exp, "rating": rate(work_exp, 4,   2)},
-        "Research":   {"value": research, "rating": "Strong" if research else "Weak"},
-    }
-
     internship = bool(body.get("internship", False))
+
+    scorecard = {
+        "CGPA":       {"value": cgpa,       "rating": rate(cgpa,     8.0, 7.0)},
+        "SOP":        {"value": sop,        "rating": rate(sop,      4.5, 3.0)},
+        "LOR":        {"value": lor,        "rating": rate(lor,      4.5, 3.0)},
+        "Work Exp":   {"value": work_exp,   "rating": rate(work_exp, 4,   2)},
+        "Research":   {"value": research,   "rating": "Strong" if research else "Weak"},
+        "Internship": {"value": internship, "rating": "Strong" if internship else "Weak"},
+    }
 
     # Tips
     tips = []

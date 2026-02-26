@@ -214,12 +214,17 @@ export default function Home() {
                                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '.82rem', color: '#94a3b8', marginBottom: 3 }}>
                                         <span>{key}</span>
                                         <span style={{ color: COLOR[val.rating], fontWeight: 700 }}>
-                                            {val.value}{key === 'CGPA' ? '' : key === 'Work Exp' ? ' yrs' : '/5'} — {val.rating}
+                                            {(key === 'Research' || key === 'Internship')
+                                                ? (val.value ? 'Yes' : 'No')
+                                                : key === 'Work Exp'
+                                                    ? `${val.value} yrs`
+                                                    : `${val.value}${key === 'CGPA' ? '' : '/5'}`
+                                            } — {val.rating}
                                         </span>
                                     </div>
                                     <div style={{ background: 'rgba(255,255,255,.08)', borderRadius: 999, height: 6 }}>
                                         <div style={{
-                                            width: `${Math.min(100, (val.value / (key === 'CGPA' ? 9 : key === 'Work Exp' ? 4 : key === 'Research' ? 1 : 4.5)) * 100)}%`,
+                                            width: `${Math.min(100, (val.value / (key === 'CGPA' ? 9 : key === 'Work Exp' ? 4 : (key === 'Research' || key === 'Internship') ? 1 : 4.5)) * 100)}%`,
                                             height: '100%', background: COLOR[val.rating], borderRadius: 999
                                         }} />
                                     </div>
@@ -265,6 +270,32 @@ export default function Home() {
                             }}>
                                 {flag} {name}
                             </span>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Tech stack */}
+                <div style={{ maxWidth: 900, margin: '20px auto 40px', textAlign: 'center' }}>
+                    <div style={{ color: '#475569', fontSize: '.72rem', letterSpacing: '.06em', textTransform: 'uppercase', marginBottom: 10 }}>
+                        🛠️ Built With
+                    </div>
+                    <div>
+                        {([
+                            ['🐍 Python', '#3b82f6'],
+                            ['🌲 scikit-learn', '#22c55e'],
+                            ['🐼 pandas', '#f59e0b'],
+                            ['⚛️ Next.js', '#94a3b8'],
+                            ['📘 TypeScript', '#60a5fa'],
+                            ['▲ Vercel', '#a78bfa'],
+                            ['🤗 Gradio', '#f472b6'],
+                            ['⚡ FastAPI', '#34d399'],
+                        ] as [string, string][]).map(([name, color]) => (
+                            <span key={name} style={{
+                                display: 'inline-block', margin: '4px 5px', padding: '4px 14px',
+                                borderRadius: 999, background: 'rgba(30,30,60,.6)',
+                                border: `1px solid ${color}44`,
+                                color, fontSize: '.8rem', fontWeight: 600
+                            }}>{name}</span>
                         ))}
                     </div>
                 </div>
