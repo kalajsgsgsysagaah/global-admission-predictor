@@ -432,12 +432,12 @@ export default function Home() {
                                 transition: 'color 0.2s'
                             }} onMouseOver={e => e.currentTarget.style.color = '#fef08a'} onMouseOut={e => e.currentTarget.style.color = '#64748b'}>×</button>
 
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 24 }}>
-                                <img src={`https://flagcdn.com/w40/${COUNTRY_ISO[modal]}.png`} alt={modal} style={{ width: 48, borderRadius: 4, boxShadow: '0 4px 12px rgba(0,0,0,0.4)' }} />
-                                <h2 style={{ margin: 0, fontSize: '2rem', color: '#fcd34d', fontWeight: 800 }}>Study in {modal}</h2>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+                                <img src={`https://flagcdn.com/w40/${COUNTRY_ISO[modal]}.png`} alt={modal} style={{ width: 44, borderRadius: 4, boxShadow: '0 4px 12px rgba(0,0,0,0.4)' }} />
+                                <h2 style={{ margin: 0, fontSize: '1.7rem', color: '#fcd34d', fontWeight: 800 }}>Study in {modal}</h2>
                             </div>
 
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                                 {[
                                     ['🎓', 'University ROI', COUNTRY_INFO[modal].roi],
                                     ['🏛️', 'Requirements', COUNTRY_INFO[modal].req],
@@ -448,23 +448,23 @@ export default function Home() {
                                     ['📈', 'Total GDP', COUNTRY_INFO[modal].gdp],
                                 ].map(([emoji, label, value]) => (
                                     <div key={label} style={{
-                                        background: 'rgba(245, 158, 11, 0.03)', padding: '16px 20px', borderRadius: 16,
-                                        border: '1px solid rgba(245, 158, 11, 0.05)', display: 'flex', gap: 16, alignItems: 'center'
+                                        background: 'rgba(245, 158, 11, 0.03)', padding: '10px 16px', borderRadius: 12,
+                                        border: '1px solid rgba(245, 158, 11, 0.05)', display: 'flex', gap: 12, alignItems: 'center'
                                     }}>
-                                        <span style={{ fontSize: '1.5rem' }}>{emoji}</span>
+                                        <span style={{ fontSize: '1.3rem' }}>{emoji}</span>
                                         <div>
-                                            <div style={{ fontSize: '0.85rem', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{label}</div>
-                                            <div style={{ fontSize: '1.1rem', color: '#fef3c7', fontWeight: 700, marginTop: 4 }}>{value}</div>
+                                            <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{label}</div>
+                                            <div style={{ fontSize: '0.95rem', color: '#fef3c7', fontWeight: 700, marginTop: 2 }}>{value}</div>
                                         </div>
                                     </div>
                                 ))}
 
                                 {/* Link Button */}
                                 <a href={COUNTRY_INFO[modal].link} target="_blank" rel="noopener noreferrer" style={{
-                                    marginTop: 8, display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'linear-gradient(90deg, #d97706, #b45309)',
-                                    color: '#fffbeb', padding: '14px 24px', borderRadius: 12, fontWeight: 700,
+                                    marginTop: 6, display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'linear-gradient(90deg, #d97706, #b45309)',
+                                    color: '#fffbeb', padding: '12px 20px', borderRadius: 10, fontWeight: 700,
                                     textDecoration: 'none', boxShadow: '0 4px 15px rgba(245, 158, 11, 0.4)',
-                                    transition: 'all 0.2s', letterSpacing: '0.03em'
+                                    transition: 'all 0.2s', letterSpacing: '0.03em', fontSize: '0.95rem'
                                 }}
                                     onMouseOver={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 20px rgba(245, 158, 11, 0.6)'; }}
                                     onMouseOut={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 15px rgba(245, 158, 11, 0.4)'; }}>
