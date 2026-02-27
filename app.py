@@ -345,7 +345,7 @@ DARK_CSS = """
 
 /* ── Global background ─────────────────────────────── */
 body, .gradio-container {
-    background: linear-gradient(135deg, #0d0d1a 0%, #12122a 50%, #0d1a2a 100%) !important;
+    background: linear-gradient(135deg, #050505 0%, #0a0a0c 50%, #000000 100%) !important;
     min-height: 100vh;
     font-family: 'Inter', 'Noto Color Emoji', sans-serif !important;
 }
@@ -361,15 +361,15 @@ select, option, li[data-value], .dropdown-item {
 
 /* ── Column / block cards ──────────────────────────── */
 .gr-block-layout, .gr-column, .gr-row > div {
-    background: rgba(255,255,255,0.04) !important;
-    border: 1px solid rgba(139,92,246,0.18) !important;
+    background: rgba(255,255,255,0.02) !important;
+    border: 1px solid rgba(245, 158, 11, 0.15) !important;
     border-radius: 16px !important;
     backdrop-filter: blur(12px);
 }
 
 /* ── Labels ────────────────────────────────────────── */
 label span, .gr-form label, .label-wrap span {
-    color: #c4b5fd !important;
+    color: #fcd34d !important;
     font-weight: 600;
     font-size: 0.85rem;
     letter-spacing: 0.03em;
@@ -379,38 +379,38 @@ label span, .gr-form label, .label-wrap span {
 input, select, textarea,
 .gr-input, .gr-dropdown, .gr-number,
 .wrap.svelte-1aygcmn {
-    background: rgba(20,10,50,0.7) !important;
-    border: 1px solid rgba(139,92,246,0.35) !important;
-    color: #e2e8f0 !important;
+    background: rgba(10,10,12,0.7) !important;
+    border: 1px solid rgba(245, 158, 11, 0.3) !important;
+    color: #f8fafc !important;
     border-radius: 10px !important;
 }
 input:focus, select:focus {
-    border-color: #7c3aed !important;
-    box-shadow: 0 0 0 3px rgba(124,58,237,0.25) !important;
+    border-color: #f59e0b !important;
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2) !important;
 }
 
 /* ── Slider track ──────────────────────────────────── */
 .gr-slider input[type=range] {
-    accent-color: #7c3aed;
+    accent-color: #f59e0b;
 }
 
 /* ── Radio buttons ─────────────────────────────────── */
 .gr-radio label {
-    background: rgba(124,58,237,0.12) !important;
-    border: 1px solid rgba(139,92,246,0.3) !important;
+    background: rgba(245, 158, 11, 0.1) !important;
+    border: 1px solid rgba(245, 158, 11, 0.25) !important;
     border-radius: 8px !important;
-    color: #ddd6fe !important;
+    color: #fde68a !important;
     padding: 4px 14px !important;
 }
 .gr-radio label.selected, .gr-radio label:has(input:checked) {
-    background: rgba(124,58,237,0.45) !important;
-    border-color: #7c3aed !important;
+    background: rgba(245, 158, 11, 0.35) !important;
+    border-color: #f59e0b !important;
     color: #fff !important;
 }
 
 /* ── Predict button ────────────────────────────────── */
 .gr-button-primary, button.primary {
-    background: linear-gradient(90deg, #6d28d9, #4f46e5) !important;
+    background: linear-gradient(90deg, #d97706, #b45309) !important;
     border: none !important;
     color: #fff !important;
     font-size: 1.05rem !important;
@@ -418,60 +418,60 @@ input:focus, select:focus {
     letter-spacing: 0.04em !important;
     border-radius: 12px !important;
     padding: 14px 32px !important;
-    box-shadow: 0 4px 20px rgba(109,40,217,0.45) !important;
+    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3) !important;
     transition: all 0.25s ease !important;
 }
 .gr-button-primary:hover, button.primary:hover {
-    background: linear-gradient(90deg, #7c3aed, #6366f1) !important;
-    box-shadow: 0 6px 28px rgba(124,58,237,0.6) !important;
+    background: linear-gradient(90deg, #f59e0b, #d97706) !important;
+    box-shadow: 0 6px 28px rgba(245, 158, 11, 0.5) !important;
     transform: translateY(-2px) !important;
 }
 
 /* ── Result output box ─────────────────────────────── */
 .gr-markdown {
-    background: rgba(109,40,217,0.1) !important;
-    border: 1px solid rgba(139,92,246,0.25) !important;
+    background: rgba(245, 158, 11, 0.05) !important;
+    border: 1px solid rgba(245, 158, 11, 0.2) !important;
     border-radius: 14px !important;
     padding: 16px 20px !important;
-    color: #e2e8f0 !important;
+    color: #f8fafc !important;
     font-size: 1.1rem !important;
 }
 
 /* ── Scrollbar ─────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #0d0d1a; }
-::-webkit-scrollbar-thumb { background: #6d28d9; border-radius: 4px; }
+::-webkit-scrollbar-track { background: #050505; }
+::-webkit-scrollbar-thumb { background: #d97706; border-radius: 4px; }
 """
 
 # ----------------------------------------
 # GRADIO UI  — dark, no white, premium look
 # ----------------------------------------
 DARK_THEME = gr.themes.Base(
-    primary_hue="violet",
-    secondary_hue="indigo",
+    primary_hue="amber",
+    secondary_hue="orange",
     neutral_hue="slate",
     font=gr.themes.GoogleFont("Inter"),
 ).set(
     # Core backgrounds — all dark
-    body_background_fill="linear-gradient(135deg,#0d0d1a,#12122a,#0d1a2a)",
-    background_fill_primary="#13132b",
-    background_fill_secondary="#0d0d1a",
-    block_background_fill="rgba(255,255,255,0.04)",
-    block_border_color="rgba(139,92,246,0.2)",
+    body_background_fill="linear-gradient(135deg,#050505,#0a0a0c,#000000)",
+    background_fill_primary="#09090b",
+    background_fill_secondary="#000000",
+    block_background_fill="rgba(255,255,255,0.02)",
+    block_border_color="rgba(245, 158, 11, 0.15)",
     # Text colours
-    body_text_color="#e2e8f0",
-    block_title_text_color="#c4b5fd",
-    block_label_text_color="#c4b5fd",
+    body_text_color="#f8fafc",
+    block_title_text_color="#fcd34d",
+    block_label_text_color="#fcd34d",
     # Input colours
-    input_background_fill="rgba(20,10,50,0.7)",
-    input_border_color="rgba(139,92,246,0.35)",
-    input_border_color_focus="#7c3aed",
+    input_background_fill="rgba(10,10,12,0.7)",
+    input_border_color="rgba(245, 158, 11, 0.3)",
+    input_border_color_focus="#f59e0b",
     # Button colours
-    button_primary_background_fill="linear-gradient(90deg,#6d28d9,#4f46e5)",
-    button_primary_background_fill_hover="linear-gradient(90deg,#7c3aed,#6366f1)",
+    button_primary_background_fill="linear-gradient(90deg,#d97706,#b45309)",
+    button_primary_background_fill_hover="linear-gradient(90deg,#f59e0b,#d97706)",
     button_primary_text_color="#ffffff",
     # Slider
-    slider_color="#7c3aed",
+    slider_color="#f59e0b",
 )
 
 with gr.Blocks() as demo:
@@ -479,17 +479,17 @@ with gr.Blocks() as demo:
     gr.Markdown(
         """
         <div style='text-align:center;padding:28px 0 14px;
-                    background:linear-gradient(90deg,rgba(109,40,217,.18),rgba(79,70,229,.18));
+                    background:linear-gradient(90deg,rgba(245, 158, 11,.10),rgba(217, 119, 6,.10));
                     border-radius:18px;margin-bottom:8px;
-                    border:1px solid rgba(139,92,246,.22)'>
+                    border:1px solid rgba(245, 158, 11,.2)'>
           <h1 style='font-size:2.4rem;margin:0;
-                     background:linear-gradient(90deg,#a78bfa,#818cf8);
+                     background:linear-gradient(90deg,#fcd34d,#fbbf24);
                      -webkit-background-clip:text;-webkit-text-fill-color:transparent'>
             🎓 Global Admission Predictor
           </h1>
           <p style='color:#94a3b8;margin:10px 0 0;font-size:1rem'>
             AI-powered admission probability across
-            <strong style='color:#c4b5fd'>12 countries</strong> ·
+            <strong style='color:#fcd34d'>12 countries</strong> ·
             Random Forest · 1,000+ real records
           </p>
         </div>
@@ -501,7 +501,7 @@ with gr.Blocks() as demo:
         # ── Left: Academic profile ──────────────────────
         with gr.Column(scale=1):
             gr.Markdown(
-                "<h3 style='color:#a78bfa;margin:4px 0 12px'>🏫 Academic Profile</h3>"
+                "<h3 style='color:#fcd34d;margin:4px 0 12px'>🏫 Academic Profile</h3>"
             )
             degree   = gr.Dropdown(DEGREE_LEVELS, value="Masters",
                                    label="Degree Level")
@@ -527,7 +527,7 @@ with gr.Blocks() as demo:
         # ── Right: Destination & exam ───────────────────
         with gr.Column(scale=1):
             gr.Markdown(
-                "<h3 style='color:#a78bfa;margin:4px 0 12px'>🌍 Destination & Exam</h3>"
+                "<h3 style='color:#fcd34d;margin:4px 0 12px'>🌍 Destination & Exam</h3>"
             )
             country = gr.Dropdown(
                 COUNTRIES_DISPLAY,
@@ -559,19 +559,19 @@ with gr.Blocks() as demo:
     output = gr.HTML(
         value=(
             "<div style='text-align:center;color:#475569;font-size:1rem;"
-            "padding:20px;border:1px dashed rgba(139,92,246,.3);"
+            "padding:20px;border:1px dashed rgba(245, 158, 11,.3);"
             "border-radius:14px'>"
             "Fill in your profile above and click "
-            "<strong style='color:#a78bfa'>Predict ✨</strong></div>"
+            "<strong style='color:#fcd34d'>Predict ✨</strong></div>"
         ),
     )
 
     _chips = " ".join(
         f"<span style='display:inline-block;margin:3px 4px;"
         f"padding:4px 13px;border-radius:999px;"
-        f"background:rgba(109,40,217,.18);"
-        f"border:1px solid rgba(139,92,246,.35);"
-        f"color:#c4b5fd;font-size:0.8rem;font-weight:600'>"
+        f"background:rgba(245, 158, 11,.10);"
+        f"border:1px solid rgba(245, 158, 11,.3);"
+        f"color:#fcd34d;font-size:0.8rem;font-weight:600'>"
         f"{flag_img(c)}{c}</span>"
         for c in COUNTRIES
     )

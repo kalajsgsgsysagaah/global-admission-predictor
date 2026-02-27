@@ -22,19 +22,84 @@ const COLOR: Record<string, string> = {
 }
 
 const COUNTRY_INFO: Record<string, any> = {
-    "Australia": { roi: "High (Top 100 Univ: Monash, Melbourne)", weather: "Sunny, Mild Winters", gdp: "$1.7 Trillion", currency: "AUD ($)", exp: "$25,000 - $40,000/yr", req: "IELTS 6.5+, CGPA 7.0+" },
-    "Canada": { roi: "High (Top 100 Univ: Toronto, UBC)", weather: "Cold Winters, Mild Summers", gdp: "$2.1 Trillion", currency: "CAD ($)", exp: "$20,000 - $35,000/yr", req: "IELTS 6.5+, CGPA 7.5+" },
-    "France": { roi: "Very High (Top 100 Univ: PSL, Sorbonne)", weather: "Temperate", gdp: "$2.9 Trillion", currency: "EUR (€)", exp: "€10,000 - €20,000/yr", req: "IELTS 6.5+, CGPA 7.0+" },
-    "Germany": { roi: "Exceptional (Top 100 Univ: TUM, LMU)", weather: "Moderate", gdp: "$4.1 Trillion", currency: "EUR (€)", exp: "€11,000 - €15,000/yr", req: "IELTS 6.5+, CGPA 7.5+" },
-    "Ireland": { roi: "High (Top 100 Univ: Trinity College)", weather: "Mild, Rainy", gdp: "$500 Billion", currency: "EUR (€)", exp: "€15,000 - €25,000/yr", req: "IELTS 6.5+, CGPA 7.0+" },
-    "Netherlands": { roi: "High (Top 100 Univ: Amsterdam, Delft)", weather: "Mild Marine", gdp: "$1.0 Trillion", currency: "EUR (€)", exp: "€15,000 - €25,000/yr", req: "IELTS 6.5+, CGPA 7.0+" },
-    "New Zealand": { roi: "Moderate (Top 100 Univ: Auckland)", weather: "Temperate Maritime", gdp: "$250 Billion", currency: "NZD ($)", exp: "$20,000 - $30,000/yr", req: "IELTS 6.5+, CGPA 7.0+" },
-    "Singapore": { roi: "Very High (Top 100 Univ: NUS, NTU)", weather: "Tropical", gdp: "$400 Billion", currency: "SGD ($)", exp: "$30,000 - $50,000/yr", req: "IELTS 6.5+, GRE Often Req" },
-    "Sweden": { roi: "High (Top 100 Univ: KTH, Lund)", weather: "Cold Winters", gdp: "$600 Billion", currency: "SEK (kr)", exp: "kr 90,000 - 150,000/yr", req: "IELTS 6.5+, CGPA 7.0+" },
-    "Switzerland": { roi: "Exceptional (Top 100 Univ: ETH Zurich)", weather: "Moderate, Alpine", gdp: "$800 Billion", currency: "CHF", exp: "CHF 25,000 - 35,000/yr", req: "IELTS 7.0+, CGPA 8.0+" },
-    "UAE": { roi: "Moderate (Top 100 Univ: Khalifa)", weather: "Desert, Hot", gdp: "$500 Billion", currency: "AED (د.إ)", exp: "AED 60,000 - 100,000/yr", req: "IELTS 6.0+, CGPA 6.5+" },
-    "UK": { roi: "High (Top 100 Univ: Oxford, Cambridge)", weather: "Temperate, Overcast", gdp: "$3.1 Trillion", currency: "GBP (£)", exp: "£20,000 - £40,000/yr", req: "IELTS 6.5+, CGPA 7.0+" },
-    "USA": { roi: "Very High (Top 100 Univ: MIT, Stanford)", weather: "Varied (Continental)", gdp: "$25.5 Trillion", currency: "USD ($)", exp: "$35,000 - $65,000/yr", req: "GRE Highly Recommended" },
+    "Australia": {
+        roi: "High (Top Univs: Melbourne, Sydney, Monash)", weather: "Sunny, Mild Winters", gdp: "$1.7 Trillion", currency: "AUD ($)", exp: "$25,000 - $45,000/yr",
+        req: "IELTS 6.5+, CGPA 7.0+",
+        avg_test: "IELTS 7.0, TOEFL 90, PTE 65",
+        link: "https://www.studyaustralia.gov.au/"
+    },
+    "Canada": {
+        roi: "High (Top Univs: Toronto, UBC, McGill)", weather: "Cold Winters, Mild Summers", gdp: "$2.1 Trillion", currency: "CAD ($)", exp: "$20,000 - $40,000/yr",
+        req: "IELTS 6.5+, CGPA 7.5+",
+        avg_test: "IELTS 6.5, TOEFL 90, PTE 60",
+        link: "https://www.educanada.ca/"
+    },
+    "France": {
+        roi: "Very High (Top Univs: PSL, Sorbonne, HEC)", weather: "Temperate/Mediterranean", gdp: "$2.9 Trillion", currency: "EUR (€)", exp: "€10,000 - €25,000/yr",
+        req: "IELTS 6.5+, CGPA 7.0+",
+        avg_test: "IELTS 6.5, TOEFL 90",
+        link: "https://www.campusfrance.org/"
+    },
+    "Germany": {
+        roi: "Exceptional (Top Univs: TUM, LMU, Heidelberg)", weather: "Moderate, 4 Seasons", gdp: "$4.1 Trillion", currency: "EUR (€)", exp: "€11,000 - €15,000/yr",
+        req: "IELTS 6.5+, CGPA 7.5+",
+        avg_test: "IELTS 6.5, TOEFL 90, GRE (Often optional)",
+        link: "https://www.study-in-germany.de/"
+    },
+    "Ireland": {
+        roi: "High (Top Univs: Trinity College, UCD)", weather: "Mild, Rainy", gdp: "$500 Billion", currency: "EUR (€)", exp: "€15,000 - €25,000/yr",
+        req: "IELTS 6.5+, CGPA 7.0+",
+        avg_test: "IELTS 6.5, TOEFL 90, PTE 63",
+        link: "https://www.educationinireland.com/"
+    },
+    "Netherlands": {
+        roi: "High (Top Univs: Amsterdam, Delft, Leiden)", weather: "Mild Marine", gdp: "$1.0 Trillion", currency: "EUR (€)", exp: "€15,000 - €25,000/yr",
+        req: "IELTS 6.5+, CGPA 7.0+",
+        avg_test: "IELTS 6.5, TOEFL 92",
+        link: "https://www.studyinnl.org/"
+    },
+    "New Zealand": {
+        roi: "Moderate (Top Univs: Auckland, Otago)", weather: "Temperate Maritime", gdp: "$250 Billion", currency: "NZD ($)", exp: "$20,000 - $35,000/yr",
+        req: "IELTS 6.5+, CGPA 7.0+",
+        avg_test: "IELTS 6.5, TOEFL 90, PTE 58",
+        link: "https://www.studywithnewzealand.govt.nz/"
+    },
+    "Singapore": {
+        roi: "Very High (Top Univs: NUS, NTU)", weather: "Tropical", gdp: "$400 Billion", currency: "SGD ($)", exp: "$30,000 - $50,000/yr",
+        req: "IELTS 6.5+, GRE Often Req",
+        avg_test: "IELTS 6.5, TOEFL 92, GRE 320+",
+        link: "https://www.moe.gov.sg/international-students"
+    },
+    "Sweden": {
+        roi: "High (Top Univs: KTH, Lund, Uppsala)", weather: "Cold Winters, Mild Summers", gdp: "$600 Billion", currency: "SEK (kr)", exp: "kr 90,000 - 150,000/yr",
+        req: "IELTS 6.5+, CGPA 7.0+",
+        avg_test: "IELTS 6.5, TOEFL 90",
+        link: "https://studyinsweden.se/"
+    },
+    "Switzerland": {
+        roi: "Exceptional (Top Univs: ETH Zurich, EPFL)", weather: "Moderate, Alpine", gdp: "$800 Billion", currency: "CHF", exp: "CHF 25,000 - 35,000/yr",
+        req: "IELTS 7.0+, CGPA 8.0+",
+        avg_test: "IELTS 7.0, TOEFL 100, GRE 320+",
+        link: "https://www.studyinswitzerland.plus/"
+    },
+    "UAE": {
+        roi: "Moderate (Top Univs: Khalifa, UAEU)", weather: "Desert, Hot", gdp: "$500 Billion", currency: "AED (د.إ)", exp: "AED 60,000 - 100,000/yr",
+        req: "IELTS 6.0+, CGPA 6.5+",
+        avg_test: "IELTS 6.0, TOEFL 79",
+        link: "https://www.moe.gov.ae/En/StudyInUAE/"
+    },
+    "UK": {
+        roi: "High (Top Univs: Oxford, Cambridge, Imperial)", weather: "Temperate, Overcast", gdp: "$3.1 Trillion", currency: "GBP (£)", exp: "£20,000 - £40,000/yr",
+        req: "IELTS 6.5+, CGPA 7.0+",
+        avg_test: "IELTS 6.5-7.0, TOEFL 92-100, PTE 62-69",
+        link: "https://study-uk.britishcouncil.org/"
+    },
+    "USA": {
+        roi: "Very High (Top Univs: MIT, Stanford, Harvard)", weather: "Varied (Continental)", gdp: "$25.5 Trillion", currency: "USD ($)", exp: "$35,000 - $65,000/yr",
+        req: "GRE Highly Recommended",
+        avg_test: "GRE 310+, IELTS 6.5-7.0, TOEFL 90-100",
+        link: "https://educationusa.state.gov/"
+    },
 }
 
 export default function Home() {
@@ -376,6 +441,7 @@ export default function Home() {
                                 {[
                                     ['🎓', 'University ROI', COUNTRY_INFO[modal].roi],
                                     ['🏛️', 'Requirements', COUNTRY_INFO[modal].req],
+                                    ['📊', 'Av. Test Score', COUNTRY_INFO[modal].avg_test],
                                     ['💰', 'Avg. Expenditure', COUNTRY_INFO[modal].exp],
                                     ['💵', 'Currency', COUNTRY_INFO[modal].currency],
                                     ['🌤️', 'Weather', COUNTRY_INFO[modal].weather],
@@ -392,6 +458,18 @@ export default function Home() {
                                         </div>
                                     </div>
                                 ))}
+
+                                {/* Link Button */}
+                                <a href={COUNTRY_INFO[modal].link} target="_blank" rel="noopener noreferrer" style={{
+                                    marginTop: 8, display: 'block', textAlign: 'center', background: 'linear-gradient(90deg, #d97706, #b45309)',
+                                    color: '#fff', padding: '14px 24px', borderRadius: 12, fontWeight: 700,
+                                    textDecoration: 'none', boxShadow: '0 4px 15px rgba(245, 158, 11, 0.4)',
+                                    transition: 'all 0.2s', letterSpacing: '0.03em'
+                                }}
+                                    onMouseOver={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 20px rgba(245, 158, 11, 0.6)'; }}
+                                    onMouseOut={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 15px rgba(245, 158, 11, 0.4)'; }}>
+                                    External Study Portal ↗
+                                </a>
                             </div>
                         </div>
                     </div>
