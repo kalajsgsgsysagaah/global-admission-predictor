@@ -184,7 +184,7 @@ def predict_admission(degree, exam_type, exam_score, work_exp,
         return (
             f"<div style='margin:7px 0'>"
             f"<div style='display:flex;justify-content:space-between;"
-            f"font-size:0.82rem;color:#94a3b8;margin-bottom:3px'>"
+            f"font-size:0.82rem;color:#d6d3d1;margin-bottom:3px'>"
             f"<span>{icon} {label}</span>"
             f"<span style='color:{c};font-weight:700'>{val}{unit} — {tag}</span></div>"
             f"<div style='background:rgba(255,255,255,.08);border-radius:999px;height:6px'>"
@@ -200,7 +200,7 @@ def predict_admission(degree, exam_type, exam_score, work_exp,
     )
     research_score = (
         "<div style='margin:7px 0;display:flex;justify-content:space-between;"
-        "font-size:0.82rem;color:#94a3b8'>"
+        "font-size:0.82rem;color:#d6d3d1'>"
         f"<span>🔬 Research Experience</span>"
         f"<span style='color:{'#22c55e' if research else '#ef4444'};font-weight:700'>"
         f"{'Yes — Strong' if research else 'No — Weak'}</span></div>"
@@ -252,21 +252,21 @@ def predict_admission(degree, exam_type, exam_score, work_exp,
 
     # ── Build HTML ────────────────────────────────────────
     hr = "<hr style='border:none;border-top:1px solid rgba(139,92,246,.2);margin:14px 0'>"
-    sec = ("<div style='color:#c4b5fd;font-weight:700;font-size:0.8rem;"
+    sec = ("<div style='color:#fcd34d;font-weight:700;font-size:0.8rem;"
            "letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px'>")
 
     details_html = (
         "<div style='display:grid;grid-template-columns:1fr 1fr;"
-        "gap:6px 24px;margin:10px 0 0;font-size:0.85rem;color:#94a3b8'>"
-        f"<span>🎓 <b style='color:#c4b5fd'>Degree</b></span><span>{degree}</span>"
-        f"<span>🌍 <b style='color:#c4b5fd'>Country</b></span>"
+        "gap:6px 24px;margin:10px 0 0;font-size:0.85rem;color:#d6d3d1'>"
+        f"<span>🎓 <b style='color:#fcd34d'>Degree</b></span><span>{degree}</span>"
+        f"<span>🌍 <b style='color:#fcd34d'>Country</b></span>"
         f"<span>{flag_img(country)}{country}</span>"
-        f"<span>📝 <b style='color:#c4b5fd'>Exam</b></span><span>{exam_type} — {exam_score}</span>"
-        f"<span>📊 <b style='color:#c4b5fd'>CGPA</b></span><span>{cgpa}</span>"
-        f"<span>📄 <b style='color:#c4b5fd'>SOP</b></span><span>{sop}/5</span>"
-        f"<span>📋 <b style='color:#c4b5fd'>LOR</b></span><span>{lor}/5</span>"
-        f"<span>🔬 <b style='color:#c4b5fd'>Research</b></span><span>{research_label}</span>"
-        f"<span>💼 <b style='color:#c4b5fd'>Work Exp</b></span><span>{work_exp} yr(s)</span>"
+        f"<span>📝 <b style='color:#fcd34d'>Exam</b></span><span>{exam_type} — {exam_score}</span>"
+        f"<span>📊 <b style='color:#fcd34d'>CGPA</b></span><span>{cgpa}</span>"
+        f"<span>📄 <b style='color:#fcd34d'>SOP</b></span><span>{sop}/5</span>"
+        f"<span>📋 <b style='color:#fcd34d'>LOR</b></span><span>{lor}/5</span>"
+        f"<span>🔬 <b style='color:#fcd34d'>Research</b></span><span>{research_label}</span>"
+        f"<span>💼 <b style='color:#fcd34d'>Work Exp</b></span><span>{work_exp} yr(s)</span>"
         "</div>"
     )
 
@@ -275,7 +275,7 @@ def predict_admission(degree, exam_type, exam_score, work_exp,
         tips_html = (
             hr + sec + "💡 Improvement Tips</div>"
             "<ul style='margin:6px 0 0 4px;padding-left:16px;"
-            "color:#94a3b8;font-size:0.85rem;line-height:1.7'>"
+            "color:#d6d3d1;font-size:0.85rem;line-height:1.7'>"
             + "".join(f"<li>{t}</li>" for t in tips) +
             "</ul>"
         )
@@ -316,7 +316,7 @@ def predict_admission(degree, exam_type, exam_score, work_exp,
         f"background:linear-gradient(90deg,{bar_color},{bar_color}99);"
         f"border-radius:999px'></div></div>"
         f"<div style='display:flex;justify-content:space-between;"
-        f"font-size:0.75rem;color:#64748b;margin-bottom:4px'>"
+        f"font-size:0.75rem;color:#a8a29e;margin-bottom:4px'>"
         f"<span>0%</span><span>50% Moderate</span><span>70% Strong</span></div>"
 
         # Profile summary
@@ -361,7 +361,7 @@ select, option, li[data-value], .dropdown-item {
 
 /* ── Column / block cards ──────────────────────────── */
 .gr-block-layout, .gr-column, .gr-row > div {
-    background: rgba(255,255,255,0.02) !important;
+    background: rgba(245, 158, 11, 0.02) !important;
     border: 1px solid rgba(245, 158, 11, 0.15) !important;
     border-radius: 16px !important;
     backdrop-filter: blur(12px);
@@ -405,14 +405,14 @@ input:focus, select:focus {
 .gr-radio label.selected, .gr-radio label:has(input:checked) {
     background: rgba(245, 158, 11, 0.35) !important;
     border-color: #f59e0b !important;
-    color: #fff !important;
+    color: #fef3c7 !important;
 }
 
 /* ── Predict button ────────────────────────────────── */
 .gr-button-primary, button.primary {
     background: linear-gradient(90deg, #d97706, #b45309) !important;
     border: none !important;
-    color: #fff !important;
+    color: #fef3c7 !important;
     font-size: 1.05rem !important;
     font-weight: 700 !important;
     letter-spacing: 0.04em !important;
@@ -444,7 +444,7 @@ input:focus, select:focus {
 """
 
 # ----------------------------------------
-# GRADIO UI  — dark, no white, premium look
+# GRADIO UI  — dark, no #fef3c7, premium look
 # ----------------------------------------
 DARK_THEME = gr.themes.Base(
     primary_hue="amber",
@@ -456,7 +456,7 @@ DARK_THEME = gr.themes.Base(
     body_background_fill="linear-gradient(135deg,#050505,#0a0a0c,#000000)",
     background_fill_primary="#09090b",
     background_fill_secondary="#000000",
-    block_background_fill="rgba(255,255,255,0.02)",
+    block_background_fill="rgba(245, 158, 11, 0.02)",
     block_border_color="rgba(245, 158, 11, 0.15)",
     # Text colours
     body_text_color="#f8fafc",
@@ -469,7 +469,7 @@ DARK_THEME = gr.themes.Base(
     # Button colours
     button_primary_background_fill="linear-gradient(90deg,#d97706,#b45309)",
     button_primary_background_fill_hover="linear-gradient(90deg,#f59e0b,#d97706)",
-    button_primary_text_color="#ffffff",
+    button_primary_text_color="#fef3c7fff",
     # Slider
     slider_color="#f59e0b",
 )
@@ -487,7 +487,7 @@ with gr.Blocks() as demo:
                      -webkit-background-clip:text;-webkit-text-fill-color:transparent'>
             🎓 Global Admission Predictor
           </h1>
-          <p style='color:#94a3b8;margin:10px 0 0;font-size:1rem'>
+          <p style='color:#d6d3d1;margin:10px 0 0;font-size:1rem'>
             AI-powered admission probability across
             <strong style='color:#fcd34d'>12 countries</strong> ·
             Random Forest · 1,000+ real records

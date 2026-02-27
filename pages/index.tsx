@@ -146,25 +146,25 @@ export default function Home() {
 
             <main style={{
                 minHeight: '100vh',
-                background: 'radial-gradient(circle at 50% -20%, #2e1065, #0f172a 40%, #020617 100%)',
-                fontFamily: "'Plus Jakarta Sans', sans-serif", padding: '40px 16px', color: '#e2e8f0',
+                background: 'radial-gradient(circle at 50% -20%, #2e1065, #080600 40%, #020617 100%)',
+                fontFamily: "'Plus Jakarta Sans', sans-serif", padding: '40px 16px', color: '#fef3c7',
                 overflowX: 'hidden'
             }}>
 
                 {/* Header */}
                 <div style={{
                     maxWidth: 900, margin: '0 auto 32px', textAlign: 'center',
-                    background: 'rgba(30, 41, 59, 0.4)',
-                    border: '1px solid rgba(139, 92, 246, 0.2)',
+                    background: 'rgba(20, 16, 0, 0.4)',
+                    border: '1px solid rgba(245, 158, 11, 0.2)',
                     borderRadius: 24, padding: '36px 20px',
-                    boxShadow: '0 20px 40px -10px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.05)',
+                    boxShadow: '0 20px 40px -10px rgba(0,0,0,0.5), inset 0 1px 1px rgba(245, 158, 11, 0.05)',
                     backdropFilter: 'blur(20px)'
                 }}>
                     <h1 style={{
                         fontSize: '3.2rem', fontWeight: 800, margin: 0,
-                        background: 'linear-gradient(135deg, #c4b5fd 0%, #a78bfa 40%, #8b5cf6 100%)',
+                        background: 'linear-gradient(135deg, #fcd34d 0%, #fbbf24 40%, #d97706 100%)',
                         WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-                        filter: 'drop-shadow(0px 4px 12px rgba(139, 92, 246, 0.3))',
+                        filter: 'drop-shadow(0px 4px 12px rgba(245, 158, 11, 0.3))',
                         letterSpacing: '-0.02em', lineHeight: 1.1
                     }}>
                         Admission Chance Predictor
@@ -180,7 +180,7 @@ export default function Home() {
                     gridTemplateColumns: 'repeat(auto-fit,minmax(380px,1fr))', gap: 24
                 }}>
                     {/* Left — Academic */}
-                    <Card title="🏫 Academic Profile" glowColor="rgba(139,92,246,0.15)">
+                    <Card title="🏫 Academic Profile" glowColor="rgba(245, 158, 11, 0.15)">
                         <Field label="📜 Degree Level">
                             <Select value={form.degree} onChange={set('degree')} options={DEGREES} />
                         </Field>
@@ -238,10 +238,10 @@ export default function Home() {
                 <div style={{ maxWidth: 900, margin: '32px auto 0', textAlign: 'center' }}>
                     <button onClick={predict} disabled={loading} style={{
                         background: 'linear-gradient(135deg, #7c3aed, #4f46e5)',
-                        color: '#fff', border: '1px solid rgba(255,255,255,0.15)',
+                        color: '#fcd34d', border: '1px solid rgba(245, 158, 11, 0.15)',
                         borderRadius: 16, padding: '16px 56px',
                         fontSize: '1.2rem', fontWeight: 800, cursor: loading ? 'wait' : 'pointer',
-                        boxShadow: '0 10px 30px -5px rgba(124, 58, 237, 0.6), inset 0 2px 4px rgba(255,255,255,0.2)',
+                        boxShadow: '0 10px 30px -5px rgba(245, 158, 11, 0.6), inset 0 2px 4px rgba(245, 158, 11, 0.2)',
                         letterSpacing: '0.04em', textTransform: 'uppercase',
                         opacity: loading ? 0.8 : 1, transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                         transform: loading ? 'scale(0.98)' : 'translateY(-2px)'
@@ -270,8 +270,8 @@ export default function Home() {
                     <div style={{
                         maxWidth: 900, margin: '32px auto 0',
                         background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9))',
-                        border: '1px solid rgba(139, 92, 246, 0.3)', borderRadius: 24,
-                        padding: '36px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.05)',
+                        border: '1px solid rgba(245, 158, 11, 0.3)', borderRadius: 24,
+                        padding: '36px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.6), inset 0 1px 1px rgba(245, 158, 11, 0.05)',
                         backdropFilter: 'blur(20px)',
                         animation: 'slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards'
                     }}>
@@ -293,7 +293,7 @@ export default function Home() {
                                     {result.prediction >= 70 ? '🎉' : result.prediction >= 45 ? '🎯' : '📉'}
                                 </span>
                                 <span style={{
-                                    background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)',
+                                    background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)',
                                     WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
                                 }}>
                                     {result.prediction}%
@@ -312,7 +312,7 @@ export default function Home() {
                         <div style={{
                             background: 'rgba(0,0,0,0.4)', borderRadius: 999, height: 16,
                             overflow: 'hidden', marginBottom: 8,
-                            boxShadow: 'inset 0 2px 10px rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.05)'
+                            boxShadow: 'inset 0 2px 10px rgba(0,0,0,0.5)', border: '1px solid rgba(245, 158, 11, 0.05)'
                         }}>
                             <div style={{
                                 width: `${result.prediction}%`, height: '100%',
@@ -327,7 +327,7 @@ export default function Home() {
 
                         <HR />
                         <SectionTitle icon="📋">Your Profile</SectionTitle>
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px 24px', fontSize: '.95rem', color: '#cbd5e1', marginTop: 16 }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px 24px', fontSize: '.95rem', color: '#fde68a', marginTop: 16 }}>
                             {[
                                 ['📜 Degree', form.degree],
                                 ['🌍 Country', <span key="c" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><img src={`https://flagcdn.com/w20/${COUNTRY_ISO[form.country]}.png`} alt={form.country} style={{ width: 18, borderRadius: 2, boxShadow: '0 2px 4px rgba(0,0,0,0.3)' }} /> {form.country}</span>],
@@ -336,15 +336,15 @@ export default function Home() {
                                 ['🔬 Research', form.research === '1' ? 'Yes ✅' : 'No ❌'],
                                 ['💼 Work Exp', `${form.work_exp} yr(s)`],
                                 ['🚀 Internship', form.internship === 'true' ? 'Yes ✅' : 'No ❌'],
-                            ].map(([k, v]) => (<span key={k as string} style={{ padding: '6px 12px', background: 'rgba(0,0,0,0.2)', borderRadius: 8, border: '1px solid rgba(255,255,255,0.03)' }}><b style={{ color: '#c4b5fd' }}>{k}</b> — {v}</span>))}
+                            ].map(([k, v]) => (<span key={k as string} style={{ padding: '6px 12px', background: 'rgba(0,0,0,0.2)', borderRadius: 8, border: '1px solid rgba(245, 158, 11, 0.03)' }}><b style={{ color: '#fcd34d' }}>{k}</b> — {v}</span>))}
                         </div>
 
                         <HR />
                         <SectionTitle icon="📈">Profile Strength</SectionTitle>
                         <div style={{ marginTop: 16, display: 'grid', gap: 14 }}>
                             {Object.entries(result.scorecard).map(([key, val]: any) => (
-                                <div key={key} style={{ padding: '12px 16px', background: 'rgba(0,0,0,0.2)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.03)' }}>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '.9rem', color: '#cbd5e1', marginBottom: 8 }}>
+                                <div key={key} style={{ padding: '12px 16px', background: 'rgba(0,0,0,0.2)', borderRadius: 12, border: '1px solid rgba(245, 158, 11, 0.03)' }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '.9rem', color: '#fde68a', marginBottom: 8 }}>
                                         <span style={{ fontWeight: 600 }}>{key}</span>
                                         <span style={{ color: COLOR[val.rating], fontWeight: 800 }}>
                                             {(key === 'Research' || key === 'Internship')
@@ -353,7 +353,7 @@ export default function Home() {
                                             } — {val.rating}
                                         </span>
                                     </div>
-                                    <div style={{ background: 'rgba(0,0,0,0.5)', borderRadius: 999, height: 8, border: '1px solid rgba(255,255,255,0.05)', overflow: 'hidden' }}>
+                                    <div style={{ background: 'rgba(0,0,0,0.5)', borderRadius: 999, height: 8, border: '1px solid rgba(245, 158, 11, 0.05)', overflow: 'hidden' }}>
                                         <div style={{
                                             width: `${Math.min(100, (val.value / (key === 'CGPA' ? 9 : key === 'Work Exp' ? 4 : (key === 'Research' || key === 'Internship') ? 1 : 4.5)) * 100)}%`,
                                             height: '100%', background: COLOR[val.rating], borderRadius: 999,
@@ -368,7 +368,7 @@ export default function Home() {
                             <>
                                 <HR />
                                 <SectionTitle icon="💡">Improvement Tips</SectionTitle>
-                                <ul style={{ paddingLeft: 20, color: '#cbd5e1', fontSize: '.95rem', lineHeight: 1.8, marginTop: 12 }}>
+                                <ul style={{ paddingLeft: 20, color: '#fde68a', fontSize: '.95rem', lineHeight: 1.8, marginTop: 12 }}>
                                     {result.tips.map((t: string, i: number) => <li key={i} style={{ marginBottom: 6 }}>{t}</li>)}
                                 </ul>
                             </>
@@ -399,7 +399,7 @@ export default function Home() {
                         {Object.keys(COUNTRIES).map((name) => (
                             <button key={name} onClick={() => setModal(name)} style={{
                                 display: 'flex', alignItems: 'center', gap: 10, padding: '10px 20px',
-                                borderRadius: 14, background: 'rgba(30, 41, 59, 0.6)',
+                                borderRadius: 14, background: 'rgba(30, 24, 0, 0.6)',
                                 border: '1px solid rgba(245, 158, 11, 0.2)', color: '#fcd34d', fontSize: '.95rem', fontWeight: 600,
                                 textDecoration: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
                                 backdropFilter: 'blur(10px)', transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -448,13 +448,13 @@ export default function Home() {
                                     ['📈', 'Total GDP', COUNTRY_INFO[modal].gdp],
                                 ].map(([emoji, label, value]) => (
                                     <div key={label} style={{
-                                        background: 'rgba(255,255,255,0.03)', padding: '16px 20px', borderRadius: 16,
-                                        border: '1px solid rgba(255,255,255,0.05)', display: 'flex', gap: 16, alignItems: 'center'
+                                        background: 'rgba(245, 158, 11, 0.03)', padding: '16px 20px', borderRadius: 16,
+                                        border: '1px solid rgba(245, 158, 11, 0.05)', display: 'flex', gap: 16, alignItems: 'center'
                                     }}>
                                         <span style={{ fontSize: '1.5rem' }}>{emoji}</span>
                                         <div>
                                             <div style={{ fontSize: '0.85rem', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{label}</div>
-                                            <div style={{ fontSize: '1.1rem', color: '#e2e8f0', fontWeight: 700, marginTop: 4 }}>{value}</div>
+                                            <div style={{ fontSize: '1.1rem', color: '#fef3c7', fontWeight: 700, marginTop: 4 }}>{value}</div>
                                         </div>
                                     </div>
                                 ))}
@@ -462,7 +462,7 @@ export default function Home() {
                                 {/* Link Button */}
                                 <a href={COUNTRY_INFO[modal].link} target="_blank" rel="noopener noreferrer" style={{
                                     marginTop: 8, display: 'block', textAlign: 'center', background: 'linear-gradient(90deg, #d97706, #b45309)',
-                                    color: '#fff', padding: '14px 24px', borderRadius: 12, fontWeight: 700,
+                                    color: '#fcd34d', padding: '14px 24px', borderRadius: 12, fontWeight: 700,
                                     textDecoration: 'none', boxShadow: '0 4px 15px rgba(245, 158, 11, 0.4)',
                                     transition: 'all 0.2s', letterSpacing: '0.03em'
                                 }}
@@ -483,7 +483,7 @@ export default function Home() {
                     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 10 }}>
                         {([
                             ['🐍 Python', '#3b82f6'], ['🌲 scikit-learn', '#22c55e'], ['🐼 pandas', '#f59e0b'],
-                            ['⚛️ Next.js', '#94a3b8'], ['📘 TypeScript', '#60a5fa'], ['▲ Vercel', '#a78bfa'],
+                            ['⚛️ Next.js', '#94a3b8'], ['📘 TypeScript', '#60a5fa'], ['▲ Vercel', '#fbbf24'],
                             ['🤗 Gradio', '#f472b6'], ['⚡ FastAPI', '#34d399'],
                         ] as [string, string][]).map(([name, color]) => (
                             <span key={name} style={{
@@ -504,12 +504,12 @@ export default function Home() {
 function Card({ title, children, glowColor }: { title: string; children: React.ReactNode; glowColor: string }) {
     return (
         <div style={{
-            background: 'rgba(30, 41, 59, 0.4)', border: '1px solid rgba(255,255,255,0.05)',
+            background: 'rgba(20, 16, 0, 0.4)', border: '1px solid rgba(245, 158, 11, 0.05)',
             borderRadius: 20, padding: '28px',
-            boxShadow: `0 15px 35px -10px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.05), inset 0 0 40px ${glowColor}`,
+            boxShadow: `0 15px 35px -10px rgba(0,0,0,0.5), inset 0 1px 1px rgba(245, 158, 11, 0.05), inset 0 0 40px ${glowColor}`,
             backdropFilter: 'blur(20px)'
         }}>
-            <h3 style={{ color: '#f8fafc', margin: '0 0 20px', fontSize: '1.15rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            <h3 style={{ color: '#fffbeb', margin: '0 0 20px', fontSize: '1.15rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 {title}
             </h3>
             {children}
@@ -520,7 +520,7 @@ function Card({ title, children, glowColor }: { title: string; children: React.R
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
     return (
         <div style={{ marginBottom: 20 }}>
-            <label style={{ display: 'block', color: '#cbd5e1', fontSize: '.85rem', fontWeight: 700, marginBottom: 8, letterSpacing: '0.02em' }}>
+            <label style={{ display: 'block', color: '#fde68a', fontSize: '.85rem', fontWeight: 700, marginBottom: 8, letterSpacing: '0.02em' }}>
                 {label}
             </label>
             {children}
@@ -538,7 +538,7 @@ function SliderField({ label, unit, min, max, step, value, onChange }: {
                 <input type="range" min={min} max={max} step={step} value={value}
                     onChange={e => onChange(e.target.value)}
                     style={{
-                        flex: 1, accentColor: '#8b5cf6', cursor: 'pointer',
+                        flex: 1, accentColor: '#d97706', cursor: 'pointer',
                         filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))'
                     }} />
                 <input type="number" min={min} max={max} step={step} value={value}
@@ -560,12 +560,12 @@ function RadioGroup({ options, value, onChange }: {
             {options.map(([v, l]) => (
                 <label key={v} style={{
                     display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer',
-                    color: value === v ? '#e2e8f0' : '#64748b', fontWeight: value === v ? 700 : 500,
-                    background: value === v ? 'rgba(139,92,246,0.2)' : 'rgba(0,0,0,0.2)',
-                    border: `1px solid ${value === v ? 'rgba(139,92,246,0.5)' : 'rgba(255,255,255,0.05)'}`,
+                    color: value === v ? '#fef3c7' : '#64748b', fontWeight: value === v ? 700 : 500,
+                    background: value === v ? 'rgba(245, 158, 11, 0.2)' : 'rgba(0,0,0,0.2)',
+                    border: `1px solid ${value === v ? 'rgba(245, 158, 11, 0.5)' : 'rgba(245, 158, 11, 0.05)'}`,
                     padding: '8px 16px', borderRadius: 10, transition: 'all 0.2s'
                 }}>
-                    <input type="radio" value={v} checked={value === v} onChange={() => onChange(v)} style={{ accentColor: '#8b5cf6' }} /> {l}
+                    <input type="radio" value={v} checked={value === v} onChange={() => onChange(v)} style={{ accentColor: '#d97706' }} /> {l}
                 </label>
             ))}
         </div>
@@ -581,7 +581,7 @@ function Select({ value, onChange, options, valueMap }: {
                 ...inputStyle, width: '100%', cursor: 'pointer', appearance: 'none', paddingRight: 40
             }}>
                 {options.map((o, i) => (
-                    <option key={o} value={valueMap ? valueMap[i] : o} style={{ background: '#0f172a', color: '#cbd5e1' }}>
+                    <option key={o} value={valueMap ? valueMap[i] : o} style={{ background: '#080600', color: '#fde68a' }}>
                         {o}
                     </option>
                 ))}
@@ -614,7 +614,7 @@ function CountrySelect({ value, onChange }: { value: string; onChange: (v: strin
                     <div style={{ position: 'fixed', inset: 0, zIndex: 9 }} onClick={() => setIsOpen(false)} />
                     <div style={{
                         position: 'absolute', top: '100%', left: 0, right: 0, marginTop: 4, zIndex: 10,
-                        background: '#0f172a', border: '1px solid rgba(139,92,246,0.3)', borderRadius: 12,
+                        background: '#080600', border: '1px solid rgba(139,92,246,0.3)', borderRadius: 12,
                         maxHeight: 280, overflowY: 'auto', boxShadow: '0 10px 25px rgba(0,0,0,0.6)',
                     }}>
                         {Object.keys(COUNTRIES).map(name => (
@@ -622,13 +622,13 @@ function CountrySelect({ value, onChange }: { value: string; onChange: (v: strin
                                 onClick={() => { onChange(name); setIsOpen(false); }}
                                 style={{
                                     padding: '10px 14px', display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer',
-                                    background: value === name ? 'rgba(139,92,246,0.2)' : 'transparent',
-                                    color: value === name ? '#c4b5fd' : '#cbd5e1',
+                                    background: value === name ? 'rgba(245, 158, 11, 0.2)' : 'transparent',
+                                    color: value === name ? '#fcd34d' : '#fde68a',
                                     transition: 'background 0.2s',
-                                    borderBottom: '1px solid rgba(255,255,255,0.03)'
+                                    borderBottom: '1px solid rgba(245, 158, 11, 0.03)'
                                 }}
-                                onMouseOver={e => e.currentTarget.style.background = 'rgba(139,92,246,0.15)'}
-                                onMouseOut={e => e.currentTarget.style.background = value === name ? 'rgba(139,92,246,0.2)' : 'transparent'}
+                                onMouseOver={e => e.currentTarget.style.background = 'rgba(245, 158, 11, 0.15)'}
+                                onMouseOut={e => e.currentTarget.style.background = value === name ? 'rgba(245, 158, 11, 0.2)' : 'transparent'}
                             >
                                 <img src={`https://flagcdn.com/w20/${COUNTRY_ISO[name]}.png`} alt={name} style={{ width: 20, borderRadius: 2, boxShadow: '0 2px 4px rgba(0,0,0,0.4)' }} />
                                 {name}
@@ -642,12 +642,12 @@ function CountrySelect({ value, onChange }: { value: string; onChange: (v: strin
 }
 
 function HR() {
-    return <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.1)', margin: '24px 0', boxShadow: '0 1px 0 rgba(0,0,0,0.5)' }} />
+    return <hr style={{ border: 'none', borderTop: '1px solid rgba(245, 158, 11, 0.1)', margin: '24px 0', boxShadow: '0 1px 0 rgba(0,0,0,0.5)' }} />
 }
 
 function SectionTitle({ children, icon }: { children: React.ReactNode; icon: string }) {
     return (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#f8fafc', fontWeight: 800, fontSize: '0.95rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#fffbeb', fontWeight: 800, fontSize: '0.95rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
             <span style={{ fontSize: '1.2rem', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }}>{icon}</span>
             {children}
         </div>
@@ -655,7 +655,7 @@ function SectionTitle({ children, icon }: { children: React.ReactNode; icon: str
 }
 
 const inputStyle: React.CSSProperties = {
-    background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.1)',
-    color: '#f8fafc', borderRadius: 12, padding: '12px 14px', fontSize: '.95rem', outline: 'none',
+    background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(245, 158, 11, 0.1)',
+    color: '#fffbeb', borderRadius: 12, padding: '12px 14px', fontSize: '.95rem', outline: 'none',
     boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.3)', fontWeight: 600, transition: 'border-color 0.2s',
 }
