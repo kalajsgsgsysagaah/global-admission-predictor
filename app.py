@@ -300,10 +300,11 @@ def predict_admission(degree, exam_type, exam_score, work_exp,
 
         # Big result
         "<div style='text-align:center'>"
-        f"<div style='font-size:3.2rem;font-weight:800;"
-        f"background:linear-gradient(90deg,#a78bfa,#818cf8);"
-        f"-webkit-background-clip:text;-webkit-text-fill-color:transparent;"
-        f"line-height:1'>{emoji} {pred}%</div>"
+        f"<div style='font-size:3.2rem;font-weight:800;line-height:1;"
+        f"display:flex;justify-content:center;align-items:center;gap:12px'>"
+        f"<span style='-webkit-text-fill-color:initial;-webkit-background-clip:initial'>{emoji}</span>"
+        f"<span style='background:linear-gradient(90deg,#a78bfa,#818cf8);"
+        f"-webkit-background-clip:text;-webkit-text-fill-color:transparent'>{pred}%</span></div>"
         f"<div style='color:{bar_color};font-weight:700;"
         f"font-size:1.1rem;margin-top:6px'>{verdict}</div>"
         "</div>"

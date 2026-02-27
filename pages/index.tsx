@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
 
 const COUNTRIES: Record<string, string> = {
@@ -21,6 +21,22 @@ const COLOR: Record<string, string> = {
     Strong: '#10b981', Average: '#f59e0b', Weak: '#ef4444',
 }
 
+const COUNTRY_INFO: Record<string, any> = {
+    "Australia": { roi: "High (Top 100 Univ: Monash, Melbourne)", weather: "Sunny, Mild Winters", gdp: "$1.7 Trillion", currency: "AUD ($)", exp: "$25,000 - $40,000/yr", req: "IELTS 6.5+, CGPA 7.0+" },
+    "Canada": { roi: "High (Top 100 Univ: Toronto, UBC)", weather: "Cold Winters, Mild Summers", gdp: "$2.1 Trillion", currency: "CAD ($)", exp: "$20,000 - $35,000/yr", req: "IELTS 6.5+, CGPA 7.5+" },
+    "France": { roi: "Very High (Top 100 Univ: PSL, Sorbonne)", weather: "Temperate", gdp: "$2.9 Trillion", currency: "EUR (€)", exp: "€10,000 - €20,000/yr", req: "IELTS 6.5+, CGPA 7.0+" },
+    "Germany": { roi: "Exceptional (Top 100 Univ: TUM, LMU)", weather: "Moderate", gdp: "$4.1 Trillion", currency: "EUR (€)", exp: "€11,000 - €15,000/yr", req: "IELTS 6.5+, CGPA 7.5+" },
+    "Ireland": { roi: "High (Top 100 Univ: Trinity College)", weather: "Mild, Rainy", gdp: "$500 Billion", currency: "EUR (€)", exp: "€15,000 - €25,000/yr", req: "IELTS 6.5+, CGPA 7.0+" },
+    "Netherlands": { roi: "High (Top 100 Univ: Amsterdam, Delft)", weather: "Mild Marine", gdp: "$1.0 Trillion", currency: "EUR (€)", exp: "€15,000 - €25,000/yr", req: "IELTS 6.5+, CGPA 7.0+" },
+    "New Zealand": { roi: "Moderate (Top 100 Univ: Auckland)", weather: "Temperate Maritime", gdp: "$250 Billion", currency: "NZD ($)", exp: "$20,000 - $30,000/yr", req: "IELTS 6.5+, CGPA 7.0+" },
+    "Singapore": { roi: "Very High (Top 100 Univ: NUS, NTU)", weather: "Tropical", gdp: "$400 Billion", currency: "SGD ($)", exp: "$30,000 - $50,000/yr", req: "IELTS 6.5+, GRE Often Req" },
+    "Sweden": { roi: "High (Top 100 Univ: KTH, Lund)", weather: "Cold Winters", gdp: "$600 Billion", currency: "SEK (kr)", exp: "kr 90,000 - 150,000/yr", req: "IELTS 6.5+, CGPA 7.0+" },
+    "Switzerland": { roi: "Exceptional (Top 100 Univ: ETH Zurich)", weather: "Moderate, Alpine", gdp: "$800 Billion", currency: "CHF", exp: "CHF 25,000 - 35,000/yr", req: "IELTS 7.0+, CGPA 8.0+" },
+    "UAE": { roi: "Moderate (Top 100 Univ: Khalifa)", weather: "Desert, Hot", gdp: "$500 Billion", currency: "AED (د.إ)", exp: "AED 60,000 - 100,000/yr", req: "IELTS 6.0+, CGPA 6.5+" },
+    "UK": { roi: "High (Top 100 Univ: Oxford, Cambridge)", weather: "Temperate, Overcast", gdp: "$3.1 Trillion", currency: "GBP (£)", exp: "£20,000 - £40,000/yr", req: "IELTS 6.5+, CGPA 7.0+" },
+    "USA": { roi: "Very High (Top 100 Univ: MIT, Stanford)", weather: "Varied (Continental)", gdp: "$25.5 Trillion", currency: "USD ($)", exp: "$35,000 - $65,000/yr", req: "GRE Highly Recommended" },
+}
+
 export default function Home() {
     const [form, setForm] = useState({
         degree: 'Masters', exam_type: 'IELTS', exam_score: '7',
@@ -30,6 +46,7 @@ export default function Home() {
     const [result, setResult] = useState<any>(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
+    const [modal, setModal] = useState<string | null>(null)
 
     const set = (k: string) => (e: any) => setForm(f => ({ ...f, [k]: e.target.value }))
     const setVal = (k: string, v: string) => setForm(f => ({ ...f, [k]: v }))
@@ -204,12 +221,18 @@ export default function Home() {
                         <div style={{ textAlign: 'center', marginBottom: 24 }}>
                             <div style={{
                                 fontSize: '4.5rem', fontWeight: 900, lineHeight: 1,
-                                background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)',
-                                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
                                 filter: `drop-shadow(0 0 25px ${result.bar_color}88)`,
-                                letterSpacing: '-0.03em'
+                                letterSpacing: '-0.03em', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '16px'
                             }}>
-                                {result.prediction >= 70 ? '🎉' : result.prediction >= 45 ? '🎯' : '📉'} {result.prediction}%
+                                <span style={{ WebkitTextFillColor: 'initial', WebkitBackgroundClip: 'initial' }}>
+                                    {result.prediction >= 70 ? '🎉' : result.prediction >= 45 ? '🎯' : '📉'}
+                                </span>
+                                <span style={{
+                                    background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)',
+                                    WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
+                                }}>
+                                    {result.prediction}%
+                                </span>
                             </div>
                             <div style={{
                                 color: result.bar_color, fontWeight: 800, fontSize: '1.4rem',
@@ -309,22 +332,70 @@ export default function Home() {
                     </div>
                     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 12 }}>
                         {Object.keys(COUNTRIES).map((name) => (
-                            <a key={name} href={`https://www.google.com/search?q=Study+in+${name}+universities+ROI+weather+GDP+overview`} target="_blank" rel="noopener noreferrer" style={{
+                            <button key={name} onClick={() => setModal(name)} style={{
                                 display: 'flex', alignItems: 'center', gap: 10, padding: '10px 20px',
                                 borderRadius: 14, background: 'rgba(30, 41, 59, 0.6)',
-                                border: '1px solid rgba(139, 92, 246, 0.2)', color: '#c4b5fd', fontSize: '.95rem', fontWeight: 600,
+                                border: '1px solid rgba(245, 158, 11, 0.2)', color: '#fcd34d', fontSize: '.95rem', fontWeight: 600,
                                 textDecoration: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-                                backdropFilter: 'blur(10px)', transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)'
+                                backdropFilter: 'blur(10px)', transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                                cursor: 'pointer'
                             }}
-                                onMouseOver={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'rgba(139,92,246,0.6)'; e.currentTarget.style.boxShadow = '0 12px 24px rgba(139,92,246,0.3)'; }}
-                                onMouseOut={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'rgba(139,92,246,0.2)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)'; }}
+                                onMouseOver={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'rgba(245,158,11,0.6)'; e.currentTarget.style.boxShadow = '0 12px 24px rgba(245,158,11,0.3)'; }}
+                                onMouseOut={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'rgba(245,158,11,0.2)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)'; }}
                             >
                                 <img src={`https://flagcdn.com/w20/${COUNTRY_ISO[name]}.png`} alt={name} style={{ width: 22, height: 'auto', borderRadius: 3, boxShadow: '0 2px 4px rgba(0,0,0,0.4)' }} />
                                 {name}
-                            </a>
+                            </button>
                         ))}
                     </div>
                 </div>
+
+                {/* Country Modal */}
+                {modal && (
+                    <div style={{
+                        position: 'fixed', inset: 0, zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(8px)', padding: 20
+                    }} onClick={() => setModal(null)}>
+                        <div style={{
+                            background: '#0a0a0c', border: '1px solid rgba(245,158,11,0.4)', borderRadius: 24,
+                            padding: 32, maxWidth: 500, width: '100%', boxShadow: '0 25px 50px rgba(0,0,0,0.8)',
+                            position: 'relative', animation: 'slideUp 0.3s ease-out'
+                        }} onClick={e => e.stopPropagation()}>
+                            <button onClick={() => setModal(null)} style={{
+                                position: 'absolute', top: 20, right: 20, background: 'transparent',
+                                border: 'none', color: '#64748b', fontSize: '1.5rem', cursor: 'pointer',
+                                transition: 'color 0.2s'
+                            }} onMouseOver={e => e.currentTarget.style.color = '#fef08a'} onMouseOut={e => e.currentTarget.style.color = '#64748b'}>×</button>
+
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 24 }}>
+                                <img src={`https://flagcdn.com/w40/${COUNTRY_ISO[modal]}.png`} alt={modal} style={{ width: 48, borderRadius: 4, boxShadow: '0 4px 12px rgba(0,0,0,0.4)' }} />
+                                <h2 style={{ margin: 0, fontSize: '2rem', color: '#fcd34d', fontWeight: 800 }}>Study in {modal}</h2>
+                            </div>
+
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                                {[
+                                    ['🎓', 'University ROI', COUNTRY_INFO[modal].roi],
+                                    ['🏛️', 'Requirements', COUNTRY_INFO[modal].req],
+                                    ['💰', 'Avg. Expenditure', COUNTRY_INFO[modal].exp],
+                                    ['💵', 'Currency', COUNTRY_INFO[modal].currency],
+                                    ['🌤️', 'Weather', COUNTRY_INFO[modal].weather],
+                                    ['📈', 'Total GDP', COUNTRY_INFO[modal].gdp],
+                                ].map(([emoji, label, value]) => (
+                                    <div key={label} style={{
+                                        background: 'rgba(255,255,255,0.03)', padding: '16px 20px', borderRadius: 16,
+                                        border: '1px solid rgba(255,255,255,0.05)', display: 'flex', gap: 16, alignItems: 'center'
+                                    }}>
+                                        <span style={{ fontSize: '1.5rem' }}>{emoji}</span>
+                                        <div>
+                                            <div style={{ fontSize: '0.85rem', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{label}</div>
+                                            <div style={{ fontSize: '1.1rem', color: '#e2e8f0', fontWeight: 700, marginTop: 4 }}>{value}</div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 {/* Tech stack */}
                 <div style={{ maxWidth: 900, margin: '40px auto 40px', textAlign: 'center' }}>
