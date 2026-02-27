@@ -423,7 +423,7 @@ export default function Home() {
                     }} onClick={() => setModal(null)}>
                         <div style={{
                             background: '#0a0a0c', border: '1px solid rgba(245,158,11,0.4)', borderRadius: 24,
-                            padding: 32, maxWidth: 500, width: '100%', boxShadow: '0 25px 50px rgba(0,0,0,0.8)',
+                            padding: 32, maxWidth: 420, width: '100%', boxShadow: '0 25px 50px rgba(0,0,0,0.8)',
                             position: 'relative', animation: 'slideUp 0.3s ease-out'
                         }} onClick={e => e.stopPropagation()}>
                             <button onClick={() => setModal(null)} style={{
@@ -461,14 +461,15 @@ export default function Home() {
 
                                 {/* Link Button */}
                                 <a href={COUNTRY_INFO[modal].link} target="_blank" rel="noopener noreferrer" style={{
-                                    marginTop: 8, display: 'block', textAlign: 'center', background: 'linear-gradient(90deg, #d97706, #b45309)',
-                                    color: '#fcd34d', padding: '14px 24px', borderRadius: 12, fontWeight: 700,
+                                    marginTop: 8, display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'linear-gradient(90deg, #d97706, #b45309)',
+                                    color: '#fffbeb', padding: '14px 24px', borderRadius: 12, fontWeight: 700,
                                     textDecoration: 'none', boxShadow: '0 4px 15px rgba(245, 158, 11, 0.4)',
                                     transition: 'all 0.2s', letterSpacing: '0.03em'
                                 }}
                                     onMouseOver={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 20px rgba(245, 158, 11, 0.6)'; }}
                                     onMouseOut={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 15px rgba(245, 158, 11, 0.4)'; }}>
-                                    External Study Portal ↗
+                                    <span>🌐 View {modal} Study Portal</span>
+                                    <span>↗</span>
                                 </a>
                             </div>
                         </div>
